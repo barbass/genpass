@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Генератор паролей</title>
+	<script type="text/javascript" src="genpass.js"></script>
+</head>
+
+<body>
+
+<h3>Генератор паролей</h3>
+
+<div>
+	<p>
+		Длина пароля: <input type='text' value='10' maxlength='2' size='2' id='pass_length' placeholder='10'>
+	</p>
+	<p>
+		Использовать спец.знаки: <input type='checkbox' value='1' id='addit_char'>
+	</p>
+	<p>
+		<input type='button' id='button_password' value='Генерировать' autofocus>
+	</p>
+	<p>
+		<b>Новый пароль:</b>
+		<input type='text' id='new_pass' size='13' maxlength='150'/>
+	</p>
+</div>
+
+<script type='text/javascript'>
+	(function() {
+		function getpass() {
+			var genpass = new GenPass(
+				{	'field_password' 		: '#new_pass',
+					'field_addit_char' 		: '#addit_char',
+					'field_length' 			: '#pass_length',
+					'length'				: document.querySelector("#pass_length").value,
+					'register_addit_char' 	: document.querySelector("#addit_char").checked | 0,
+				}
+			);
+			try {
+				genpass.formPassword();
+			} catch(e) {
+				alert(e);
+			}
+	}
+	
+		document.querySelector('#button_password').addEventListener('click', function() {getpass();}, false);
+	}());
+</script>
+
+</body>
+</html>
